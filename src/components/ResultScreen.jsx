@@ -12,7 +12,7 @@ export default function ResultScreen({ movies, onRestart }) {
               <h3>{m.title}</h3>
               <p>{m.description}</p>
               <p className="meta">
-                {m.genre} • {m.year} • {m.duration} мин
+                {m.genres.join(", ")} • {m.year} • {m.duration} мин
               </p>
             </div>
           </div>
