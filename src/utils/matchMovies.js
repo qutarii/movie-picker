@@ -14,15 +14,13 @@ export function matchMovies(answers) {
     // Темп (+1 балл)
     if (movie.pace === answers.pace) score += 1;
 
-    // Эпоха (+1 балл)
-    if (answers.era === "новое" && movie.year >= 2010) score += 1;
-    if (answers.era === "классика" && movie.year < 2000) score += 1;
+    // Эпоха (+1 балл) — берём era из каталога: в нём уже учтены фильмы 2000–2009
+    if (answers.era !== "без разницы" && movie.era === answers.era) score += 1;
     if (answers.era === "без разницы") score += 1;
 
-    // Длина (+1 балл) — теперь проверяем реальные числа!
-    if (answers.duration === "короткий" && movie.duration < 90) score += 1;
-    if (answers.duration === "средний" && movie.duration >= 90 && movie.duration <= 120) score += 1;
-    if (answers.duration === "длинный" && movie.duration > 120) score += 1;
+    // Длина (+1 балл) — два варианта: покороче (< 120 мин) и подлиннее (>= 120 мин)
+    if (answers.duration === "покороче" && movie.duration < 120) score += 1;
+    if (answers.duration === "подлиннее" && movie.duration >= 120) score += 1;
 
     // Глубина (+2 балла)
     if (movie.depth === answers.depth) score += 2;
